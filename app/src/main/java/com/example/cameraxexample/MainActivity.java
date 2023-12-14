@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         } );
     }
 
-
+/*
     public void sendPhotoViaUDP(String ipAddress, int port, Bitmap photo) {
         AsyncTask.execute(() -> {
             try {
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+*/
 
     public void startCamera ( int cameraFacing ) {
         int aspectRatio = aspectRatio ( previewView.getWidth ( ) , previewView.getHeight ( ) );
@@ -188,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
                         OutputStream outputStream = resolver.openOutputStream(imageUri);
                         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                        sendPhotoViaUDP( "192.168.1.15", 9876, bitmap);
+                        UDP udp = new UDP ();
+                        udp.execute ();
                         outputStream.close();
                     }
                 } catch (Exception e) {
