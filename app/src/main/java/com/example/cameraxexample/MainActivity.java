@@ -16,15 +16,31 @@ import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 
@@ -40,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     } );
+
+
+
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -70,6 +89,37 @@ public class MainActivity extends AppCompatActivity {
         } );
     }
 
+
+    public void sendPhotoViaUDP(String ipAddress, int port, Bitmap photo) {
+        AsyncTask.execute(() -> {
+            try {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                DatagramSocket socket = new DatagramSocket();
+                InetAddress serverAddr = InetAddress.getByName(ipAddress);
+                DatagramPacket packet = new DatagramPacket(byteArray, byteArray.length, serverAddr, port);
+
+                socket.send(packet);
+                socket.close();
+
+                runOnUiThread(() -> {
+                    Toast.makeText(MainActivity.this, "Foto inviata con successo via UDP", Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    Toast.makeText(MainActivity.this, "Errore nell'invio della foto via UDP", Toast.LENGTH_SHORT).show();
+                    Log.e("UDP", "Exception during UDP photo transmission", e);
+                });
+            }
+        });
+    }
+
+
+
+
     public void startCamera ( int cameraFacing ) {
         int aspectRatio = aspectRatio ( previewView.getWidth ( ) , previewView.getHeight ( ) );
         ListenableFuture < ProcessCameraProvider > listenableFuture = ProcessCameraProvider.getInstance ( this );
@@ -80,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Preview preview = new Preview.Builder ( ).setTargetAspectRatio ( aspectRatio ).build ( );
 
-                ImageCapture imageCapture = new ImageCapture.Builder ( ).setCaptureMode ( ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY )
+                ImageCapture imageCapture = new ImageCapture.Builder ( )
+                        .setCaptureMode ( ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY )
                         .setTargetRotation ( getWindowManager ( ).getDefaultDisplay ( ).getRotation ( ) ).build ( );
 
                 CameraSelector cameraSelector = new CameraSelector.Builder ( )
@@ -114,35 +165,64 @@ public class MainActivity extends AppCompatActivity {
         } , ContextCompat.getMainExecutor ( this ) );
     }
 
-    public void takePicture ( ImageCapture imageCapture ) {
-        final File file = new File ( getExternalFilesDir ( null ) , System.currentTimeMillis ( ) + ".jpg" );
-        ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder ( file ).build ( );
-        imageCapture.takePicture ( outputFileOptions , Executors.newCachedThreadPool ( ) , new ImageCapture.OnImageSavedCallback ( ) {
+
+    public void takePicture(@NonNull ImageCapture imageCapture) {
+        final File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "image" + System.currentTimeMillis() + ".jpeg");
+
+        ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
+
+        imageCapture.takePicture(outputFileOptions, Executors.newCachedThreadPool(), new ImageCapture.OnImageSavedCallback() {
             @Override
-            public void onImageSaved ( @NonNull ImageCapture.OutputFileResults outputFileResults ) {
-                runOnUiThread ( new Runnable ( ) {
-                    @Override
-                    public void run ( ) {
-                        Toast.makeText ( MainActivity.this , "Immagine salvata in: " + file.getPath ( ) , Toast.LENGTH_SHORT ).show ( );
+            public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DISPLAY_NAME, file.getName()); // Imposta il nome visualizzato con il nome del file
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                values.put(MediaStore.Images.Media.DATA, file.getAbsolutePath());
+                values.put(MediaStore.Images.Media.IS_PENDING, 1);
+
+                ContentResolver resolver = getContentResolver();
+                Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+                try {
+                    if (imageUri != null) {
+                        OutputStream outputStream = resolver.openOutputStream(imageUri);
+                        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                        sendPhotoViaUDP( "192.168.1.15", 9876, bitmap);
+                        outputStream.close();
                     }
-                } );
-                startCamera ( cameraFacing );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    values.put(MediaStore.Images.Media.IS_PENDING, 0);
+                    resolver.update(imageUri, values, null, null);
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Immagine salvata in: " + file.getPath(), Toast.LENGTH_SHORT).show();
+                        System.out.println(file.getPath());
+                    }
+                });
+                startCamera(cameraFacing);
             }
 
             @Override
-            public void onError ( @NonNull ImageCaptureException exception ) {
-                runOnUiThread ( new Runnable ( ) {
+            public void onError(@NonNull ImageCaptureException exception) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void run ( ) {
-                        Toast.makeText ( MainActivity.this , "Fallito: " + exception.getMessage ( ) , Toast.LENGTH_SHORT ).show ( );
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Fallito: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                } );
-                startCamera ( cameraFacing );
+                });
+                startCamera(cameraFacing);
             }
-        } );
+        });
     }
 
-    private void setFlashIcon ( Camera camera ) {
+
+    private void setFlashIcon ( @NonNull Camera camera ) {
         if ( camera.getCameraInfo ( ).hasFlashUnit ( ) ) {
             if ( camera.getCameraInfo ( ).getTorchState ( ).getValue ( ) == 0 ) {
                 camera.getCameraControl ( ).enableTorch ( true );
