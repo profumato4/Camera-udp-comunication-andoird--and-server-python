@@ -17,7 +17,7 @@ public class UDP extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         try {
-            s = new Socket("192.168.1.15", 50001);
+            s = new Socket("192.168.1.9", 50001);
 
             File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             File[] files = directory.listFiles();

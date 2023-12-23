@@ -11,6 +11,7 @@ drawable _f7f37afcecb6d48449b00eeaf012803
 drawable baseline_flash_off_24
 drawable baseline_flash_on_24
 drawable cerchio_bianco_vuoto_cappello_trucker
+drawable download
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable image

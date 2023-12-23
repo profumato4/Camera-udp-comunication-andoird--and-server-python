@@ -1,118 +1,114 @@
 [
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable-v24\\ic_launcher_foreground.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_image__1_.png.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\image__1_.png"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_round_camera_24.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\round_camera_24.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/xml_backup_rules.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/xml/backup_rules.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-hdpi\\ic_launcher.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-xhdpi\\ic_launcher.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_cerchio_bianco_vuoto_cappello_trucker.jpg.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/cerchio_bianco_vuoto_cappello_trucker.jpg"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_baseline_flash_off_24.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\baseline_flash_off_24.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_round_camera_24.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/round_camera_24.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-xxhdpi\\ic_launcher.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable__f7f37afcecb6d48449b00eeaf012803.jpg.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\_f7f37afcecb6d48449b00eeaf012803.jpg"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_image__1_.png.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/image__1_.png"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_image04.jpg.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\image04.jpg"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable__f7f37afcecb6d48449b00eeaf012803.jpg.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/_f7f37afcecb6d48449b00eeaf012803.jpg"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-anydpi-v33_ic_launcher.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-anydpi-v33/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\layout\\activity_main.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable-v24/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\xml\\data_extraction_rules.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_cerchio_bianco_vuoto_cappello_trucker.jpg.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\cerchio_bianco_vuoto_cappello_trucker.jpg"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_round_flip_camera_android_24.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/round_flip_camera_android_24.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_image.png.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\image.png"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_image04.jpg.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/image04.jpg"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_baseline_flash_on_24.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\baseline_flash_on_24.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-mdpi/ic_launcher.webp"
     },
     {
         "merged": "com.example.cameraxexample.app-merged_res-33:/layout_activity_main.xml.flat",
         "source": "com.example.cameraxexample.app-main-35:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-mdpi\\ic_launcher_round.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-xxxhdpi\\ic_launcher.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-xhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_baseline_flash_off_24.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/baseline_flash_off_24.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\xml\\backup_rules.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_image.png.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/image.png"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-mdpi\\ic_launcher.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_round_flip_camera_android_24.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\round_flip_camera_android_24.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_cerchio_in_metallo_colore_bianco_cm_30.jpg.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\cerchio_in_metallo_colore_bianco_cm_30.jpg"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_download.png.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/download.png"
     },
     {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-hdpi\\ic_launcher_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-anydpi-v33_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-anydpi-v33\\ic_launcher.xml"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_baseline_flash_on_24.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/drawable/baseline_flash_on_24.xml"
     }
 ]

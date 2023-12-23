@@ -2720,6 +2720,7 @@ int drawable design_ic_visibility 0x7f070087
 int drawable design_ic_visibility_off 0x7f070088
 int drawable design_password_eye 0x7f070089
 int drawable design_snackbar_background 0x7f07008a
+int drawable download 0x7f0700e8
 int drawable ic_arrow_back_black_24 0x7f07008b
 int drawable ic_clear_black_24 0x7f07008c
 int drawable ic_clock_black_24dp 0x7f07008d
