@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiNetworkSuggestion;
 import android.os.Bundle;
@@ -52,7 +53,9 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
     private static final String SSID = "TIM-29562191";
     private static final String PASSWORD = "rq7ngXZMQlc3NTVl1pZCNTlK";
-    private Context context = this;
+    private final Context context = this;
+    private WifiManager wifiManager;
+
     private boolean suc = false;
     ImageButton capture, toggleFlash, flipCamera;
     private PreviewView previewView;
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             activityResultLauncher.launch ( Manifest.permission.CAMERA );
         } else {
             startCamera ( cameraFacing );
-            connectToWifi ( );
+            connectToWifi2();
         }
         flipCamera.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
@@ -105,9 +108,39 @@ public class MainActivity extends AppCompatActivity {
                         .setWpa2Passphrase(PASSWORD)
                         .build();
 
-        final WifiManager wifiManager =
-                ( WifiManager ) context.getSystemService(Context.WIFI_SERVICE);
+        wifiManager = ( WifiManager ) context.getSystemService(Context.WIFI_SERVICE);
         wifiManager.addNetworkSuggestions(Collections.singletonList(wifi));
+
+    }
+
+    private boolean checkWifiConnection(){
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+
+        if (wifiInfo != null && wifiInfo.getNetworkId() != -1) {
+            String currentSSID = wifiInfo.getSSID().replace("\"", "");
+            if(currentSSID.equals(SSID)) {
+                checkResult(true);
+                return true;
+            } else {
+                checkResult(false);
+                return false;
+            }
+        }
+        checkResult ( false );
+        return false;
+    }
+
+    private void connectToWifi2(){
+        new Thread (()->{
+            while (!checkWifiConnection ( )){
+                connectToWifi ();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start ();
     }
 
 
@@ -280,4 +313,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
