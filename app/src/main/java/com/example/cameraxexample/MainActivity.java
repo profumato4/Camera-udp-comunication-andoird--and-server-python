@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.net.wifi.WifiNetworkSuggestion;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             activityResultLauncher.launch ( Manifest.permission.CAMERA );
         } else {
             startCamera ( cameraFacing );
-            scanWifiNetworks();
             connectToWifi ( );
         }
         flipCamera.setOnClickListener ( new View.OnClickListener ( ) {
@@ -95,18 +96,7 @@ public class MainActivity extends AppCompatActivity {
         } );
     }
 
-    private void scanWifiNetworks ( ) {
-        WifiManager wifiManager = ( WifiManager ) getApplicationContext ( ).getSystemService ( Context.WIFI_SERVICE );
-        wifiManager.startScan ( );
 
-        if ( ActivityCompat.checkSelfPermission ( this , Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 12);
-        }else{
-            List < ScanResult > results = wifiManager.getScanResults ( );
-        }
-
-
-    }
 
     private void connectToWifi() {
         final WifiNetworkSuggestion wifi =
