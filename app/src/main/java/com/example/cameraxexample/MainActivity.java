@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -247,6 +248,11 @@ public class MainActivity extends AppCompatActivity {
                     if ( imageUri != null ) {
                         OutputStream outputStream = resolver.openOutputStream ( imageUri );
                         Bitmap bitmap = BitmapFactory.decodeFile ( file.getAbsolutePath ( ) );
+                        if(cameraFacing == CameraSelector.LENS_FACING_BACK){
+                            bitmap = rotateBitmap(bitmap, -270);
+                        }else{
+                            bitmap = rotateBitmap(bitmap, 270);
+                        }
                         bitmap.compress ( Bitmap.CompressFormat.JPEG , 100 , outputStream );
                         UDP udp = new UDP ( );
                         udp.execute ( );
@@ -327,4 +333,12 @@ public class MainActivity extends AppCompatActivity {
             } );
         }
     }
+
+    public  Bitmap rotateBitmap(Bitmap source, float angle) {
+        Matrix matrix = new Matrix ();
+        matrix.postRotate(angle);
+
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+
 }
