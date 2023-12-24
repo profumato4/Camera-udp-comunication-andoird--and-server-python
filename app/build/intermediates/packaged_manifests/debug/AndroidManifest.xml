@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cameraxexample"
+    package="com.example.camera"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -23,10 +23,10 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <permission
-        android:name="com.example.cameraxexample.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.example.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.cameraxexample.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.example.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:allowBackup="true"
@@ -42,7 +42,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.CameraXExample" >
         <activity
-            android:name="com.example.cameraxexample.MainActivity"
+            android:name="com.example.camera.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +62,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.cameraxexample.androidx-startup"
+            android:authorities="com.example.camera.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"

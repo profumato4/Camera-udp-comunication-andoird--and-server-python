@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.cameraxexample"
+        applicationId "com.example.camera"
         minSdk 29
         targetSdk 33
         versionCode 1

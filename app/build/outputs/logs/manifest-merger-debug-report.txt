@@ -150,12 +150,12 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ut
 		ADDED from C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:29:9-52
 	android:dataExtractionRules
 		ADDED from C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:23:9-65
-activity#com.example.cameraxexample.MainActivity
+activity#com.example.camera.MainActivity
 ADDED from C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:31:9-39:20
 	android:exported
 		ADDED from C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:33:13-36
 	android:name
-		ADDED from C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:32:13-41
+		ADDED from C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:32:13-59
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:34:13-38:29
 action#android.intent.action.MAIN
@@ -316,7 +316,7 @@ ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-
 		ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
-permission#com.example.cameraxexample.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#com.example.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
@@ -326,7 +326,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
-uses-permission#com.example.cameraxexample.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#com.example.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:22-94

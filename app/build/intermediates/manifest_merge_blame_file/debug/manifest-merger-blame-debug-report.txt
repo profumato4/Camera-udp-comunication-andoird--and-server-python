@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.cameraxexample"
+3    package="com.example.camera"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
@@ -47,12 +47,12 @@
 24
 25    <permission
 25-->[androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
-26        android:name="com.example.cameraxexample.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+26        android:name="com.example.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 26-->[androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
 27        android:protectionLevel="signature" />
 27-->[androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
 28
-29    <uses-permission android:name="com.example.cameraxexample.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+29    <uses-permission android:name="com.example.camera.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 29-->[androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
 29-->[androidx.core:core:1.9.0] C:\Users\Utente\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 30
@@ -81,8 +81,8 @@
 43-->C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:29:9-52
 44        <activity
 44-->C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:31:9-39:20
-45            android:name="com.example.cameraxexample.MainActivity"
-45-->C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:32:13-41
+45            android:name="com.example.camera.MainActivity"
+45-->C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:32:13-59
 46            android:exported="true" >
 46-->C:\Users\Utente\AndroidStudioProjects\Camera\app\src\main\AndroidManifest.xml:33:13-36
 47            <intent-filter>
@@ -117,7 +117,7 @@
 63-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Utente\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 64            android:name="androidx.startup.InitializationProvider"
 64-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Utente\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-65            android:authorities="com.example.cameraxexample.androidx-startup"
+65            android:authorities="com.example.camera.androidx-startup"
 65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Utente\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
 66            android:exported="false" >
 66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Utente\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37

@@ -72,8 +72,8 @@
         "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\baseline_flash_on_24.xml"
     },
     {
-        "merged": "com.example.cameraxexample.app-merged_res-33:/drawable_icon.png.flat",
-        "source": "com.example.cameraxexample.app-main-35:/drawable/icon.png"
+        "merged": "com.example.cameraxexample.app-merged_res-33:/layout_activity_main.xml.flat",
+        "source": "com.example.cameraxexample.app-main-35:/layout/activity_main.xml"
     },
     {
         "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -82,6 +82,10 @@
     {
         "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\drawable_icon.png.flat",
+        "source": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-main-35:\\drawable\\icon.png"
     },
     {
         "merged": "C:\\Users\\Utente\\.gradle\\daemon\\7.5\\com.example.cameraxexample.app-merged_res-33:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
