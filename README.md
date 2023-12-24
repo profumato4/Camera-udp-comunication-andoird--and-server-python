@@ -109,7 +109,7 @@ Follow these steps to set up and use the Python server for receiving images:
 2. **Clone the Repository:**
    Clone this GitHub repository to your local machine.
    ```bash
-   git clone https://github.com/profumato4/Camera.git
+   git clone https://github.com/profumato4/Camera-udp-comunication-andoird--and-server-python.git
 
 
 3. **Navigate to the Server Directory:**
