@@ -1,30 +1,24 @@
 package com.example.cameraxexample;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiNetworkSuggestion;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
-import java.util.Collections;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -39,27 +33,26 @@ import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
 import java.io.OutputStream;
-import java.util.List;
+import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private static final String SSID = "TIM-29562191";
     private static final String PASSWORD = "rq7ngXZMQlc3NTVl1pZCNTlK";
-    private final Context context = this;
+    private final Context context = MainActivity.this;
     private WifiManager wifiManager;
 
-    private boolean suc = false;
     ImageButton capture, toggleFlash, flipCamera;
     private PreviewView previewView;
     int cameraFacing = CameraSelector.LENS_FACING_BACK;
+
     private final ActivityResultLauncher < String > activityResultLauncher = registerForActivityResult ( new ActivityResultContracts.RequestPermission ( ) , new ActivityResultCallback < Boolean > ( ) {
         @Override
         public void onActivityResult ( Boolean result ) {
@@ -84,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             activityResultLauncher.launch ( Manifest.permission.CAMERA );
         } else {
             startCamera ( cameraFacing );
-            connectToWifi2();
+            connectToWifi2 ( );
         }
         flipCamera.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
@@ -100,47 +93,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    private void connectToWifi() {
+    private void connectToWifi ( ) {
         final WifiNetworkSuggestion wifi =
-                new WifiNetworkSuggestion.Builder ()
-                        .setSsid(SSID)
-                        .setWpa2Passphrase(PASSWORD)
-                        .build();
+                new WifiNetworkSuggestion.Builder ( )
+                        .setSsid ( SSID )
+                        .setWpa2Passphrase ( PASSWORD )
+                        .build ( );
 
-        wifiManager = ( WifiManager ) context.getSystemService(Context.WIFI_SERVICE);
-        wifiManager.addNetworkSuggestions(Collections.singletonList(wifi));
+        wifiManager = ( WifiManager ) context.getSystemService ( Context.WIFI_SERVICE );
+        wifiManager.addNetworkSuggestions ( Collections.singletonList ( wifi ) );
 
     }
 
-    private boolean checkWifiConnection(){
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+    private boolean checkWifiConnection ( ) {
+        wifiManager = ( WifiManager ) context.getSystemService ( Context.WIFI_SERVICE );
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo ( );
 
-        if (wifiInfo != null && wifiInfo.getNetworkId() != -1) {
-            String currentSSID = wifiInfo.getSSID().replace("\"", "");
-            if(currentSSID.equals(SSID)) {
-                checkResult(true);
+        if ( wifiInfo != null && wifiInfo.getNetworkId ( ) != -1 ) {
+            String currentSSID = wifiInfo.getSSID ( ).replace ( "\"" , "" );
+            if ( currentSSID.equals ( SSID ) ) {
+                checkResult ( true );
                 return true;
             } else {
-                checkResult(false);
                 return false;
             }
         }
-        checkResult ( false );
         return false;
     }
 
-    private void connectToWifi2(){
-        new Thread (()->{
-            while (!checkWifiConnection ( )){
-                connectToWifi ();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+    private boolean isWifiEnabled ( ) {
+        wifiManager = ( WifiManager ) context.getSystemService ( Context.WIFI_SERVICE );
+        return wifiManager.isWifiEnabled ( );
+    }
+
+    private void connectToWifi2 ( ) {
+        new Thread ( ( ) -> {
+            if ( isWifiEnabled ( ) ) {
+                while (!checkWifiConnection ( )) {
+                    connectToWifi ( );
+                    try {
+                        Thread.sleep ( 1000 );
+                    } catch ( InterruptedException e ) {
+                        e.printStackTrace ( );
+                    }
                 }
+            } else {
+                runOnUiThread ( ( ) -> {
+                    Intent intent = new Intent ( Settings.Panel.ACTION_WIFI );
+                    startActivity ( intent );
+                } );
             }
-        }).start ();
+
+
+        } ).start ( );
     }
 
 
@@ -306,10 +311,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkResult ( boolean isSuccess ) {
-        if ( isSuccess )
-            Toast.makeText ( MainActivity.this , "Connessione stabilita" , Toast.LENGTH_SHORT ).show ( );
-        else
-            Toast.makeText ( MainActivity.this , "Connessione non stabilita" , Toast.LENGTH_SHORT ).show ( );
+        if ( isSuccess ) {
+            runOnUiThread ( new Runnable ( ) {
+                @Override
+                public void run ( ) {
+                    Toast.makeText ( MainActivity.this , "Connessione stabilita" , Toast.LENGTH_SHORT ).show ( );
+                }
+            } );
+        } else {
+            runOnUiThread ( new Runnable ( ) {
+                @Override
+                public void run ( ) {
+                    Toast.makeText ( MainActivity.this , "Connessione non stabilita" , Toast.LENGTH_SHORT ).show ( );
+                }
+            } );
+        }
     }
-
 }
