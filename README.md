@@ -140,6 +140,9 @@ The Python server will receive the image data from the Android app and save it a
 9. **Check the Output:**
 Verify that the image was successfully received and saved by checking the "temp.jpeg" file in the server directory.
 
+10. **Stop the Server:**
+The server automatically stops after receiving the image. If you want to keep the server continuously active it would be enough to put all the code in a `while True:`, the received photo would be overwritten every time so changes would have to be made to the file name making it unique to example by setting the file name with milliseconds or something like that
+
 # Contacts
 For questions, suggestions or bug reports, please contact the following email [livgh34@gmail.com].
 
