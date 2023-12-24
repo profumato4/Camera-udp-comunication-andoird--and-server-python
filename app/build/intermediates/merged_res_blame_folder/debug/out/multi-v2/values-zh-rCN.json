@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.cameraxexample.app-mergeDebugResources-31:/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "com.example.cameraxexample.app-mergeDebugResources-30:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Utente\\.gradle\\caches\\transforms-3\\ec4f76f6c0c02de8ba18086e7bd9baf5\\transformed\\core-1.9.0\\res\\values-zh-rCN\\values-zh-rCN.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "96",
-                        "startColumns": "4",
-                        "startOffsets": "7221",
-                        "endColumns": "100",
-                        "endOffsets": "7317"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Utente\\.gradle\\caches\\transforms-3\\44fc53ad3ef1477fcc7b5dbdbf1cb4c0\\transformed\\appcompat-1.6.1\\res\\values-zh-rCN\\values-zh-rCN.xml",
+                    "source": "C:\\Users\\Utente\\.gradle\\caches\\transforms-3\\4f67dfc311dd2680d3f0bf628ba34b33\\transformed\\appcompat-1.6.1\\res\\values-zh-rCN\\values-zh-rCN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Utente\\.gradle\\caches\\transforms-3\\1d6008e40b174b18ef5fa9ea4cd35014\\transformed\\material-1.8.0\\res\\values-zh-rCN\\values-zh-rCN.xml",
+                    "source": "C:\\Users\\Utente\\.gradle\\caches\\transforms-3\\56eb5eeb833e5a49d11812b0a8ec945c\\transformed\\material-1.8.0\\res\\values-zh-rCN\\values-zh-rCN.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -54,6 +37,23 @@
                         "endLines": "5,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94",
                         "endColumns": "12,63,61,69,69,76,90,105,72,61,76,58,58,77,60,56,55,58,57,53,84,55,57,53,64,91,73,75,121,61,61,78,49,50,65,63,68,77,60,70,66,59,78,66,82,84,73,64,75,47,63,75,77,61,63,62,79,75,77,76,53,54,68",
                         "endOffsets": "292,2913,2975,3045,3115,3192,3283,3389,3462,3524,3601,3660,3719,3797,3858,3915,3971,4030,4088,4142,4227,4283,4341,4395,4460,4552,4626,4702,4824,4886,4948,5027,5077,5128,5194,5258,5327,5405,5466,5537,5604,5664,5743,5810,5893,5978,6052,6117,6193,6241,6305,6381,6459,6521,6585,6648,6728,6804,6882,6959,7013,7068,7137"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Utente\\.gradle\\caches\\transforms-3\\0bb5616a7558933ce9ef66db5210a361\\transformed\\core-1.9.0\\res\\values-zh-rCN\\values-zh-rCN.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "96",
+                        "startColumns": "4",
+                        "startOffsets": "7221",
+                        "endColumns": "100",
+                        "endOffsets": "7317"
                     }
                 }
             ]

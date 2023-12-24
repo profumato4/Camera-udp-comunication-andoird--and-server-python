@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cameraxexample.test" >
+    package="com.example.camera.test" >
 
     <uses-sdk
-        android:minSdkVersion="24"
+        android:minSdkVersion="29"
         android:targetSdkVersion="33" />
 
     <instrumentation
         android:name="androidx.test.runner.AndroidJUnitRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for com.example.cameraxexample"
-        android:targetPackage="com.example.cameraxexample" />
+        android:label="Tests for com.example.camera"
+        android:targetPackage="com.example.camera" />
 
     <uses-permission android:name="android.permission.REORDER_TASKS" />
 

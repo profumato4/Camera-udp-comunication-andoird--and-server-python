@@ -1,26 +1,26 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.cameraxexample.test" >
+3    package="com.example.camera.test" >
 4
 5    <uses-sdk
-5-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:5:5-74
-6        android:minSdkVersion="24"
-6-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:5:15-41
+5-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:5:5-74
+6        android:minSdkVersion="29"
+6-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:5:15-41
 7        android:targetSdkVersion="33" />
-7-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:5:42-71
+7-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:5:42-71
 8
 9    <instrumentation
-9-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:11:5-15:76
+9-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:11:5-15:68
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:11:22-76
+10-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:11:22-76
 11        android:functionalTest="false"
-11-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:14:22-52
+11-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:14:22-52
 12        android:handleProfiling="false"
-12-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:13:22-53
-13        android:label="Tests for com.example.cameraxexample"
-13-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:15:22-74
-14        android:targetPackage="com.example.cameraxexample" />
-14-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:12:22-72
+12-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:13:22-53
+13        android:label="Tests for com.example.camera"
+13-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:15:22-66
+14        android:targetPackage="com.example.camera" />
+14-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:12:22-64
 15
 16    <uses-permission android:name="android.permission.REORDER_TASKS" />
 16-->[androidx.test:core:1.5.0] C:\Users\Utente\.gradle\caches\transforms-3\cd423349e9fa80d0989033f52c5735f3\transformed\core-1.5.0\AndroidManifest.xml:24:5-72
@@ -40,12 +40,12 @@
 22    </queries>
 23
 24    <application
-24-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:7:5-9:19
+24-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:7:5-9:19
 25        android:debuggable="true"
 26        android:extractNativeLibs="false" >
 27        <uses-library android:name="android.test.runner" />
-27-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:8:9-60
-27-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest16569652464263525667.xml:8:23-57
+27-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:8:9-60
+27-->C:\Users\Utente\AndroidStudioProjects\Camera\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2133179598990868929.xml:8:23-57
 28
 29        <activity
 29-->[androidx.test:core:1.5.0] C:\Users\Utente\.gradle\caches\transforms-3\cd423349e9fa80d0989033f52c5735f3\transformed\core-1.5.0\AndroidManifest.xml:27:9-34:20

@@ -80,8 +80,14 @@ public class MainActivity extends AppCompatActivity {
             activityResultLauncher.launch ( Manifest.permission.CAMERA );
         } else {
             startCamera ( cameraFacing );
-            connectToWifi2 ( );
         }
+
+        if(!isWifiEnabled ()){
+            enableWifi ();
+        }else if(isWifiEnabled ()){
+            connectToWifi2 ();
+        }
+
         flipCamera.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View view ) {
@@ -140,18 +146,15 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace ( );
                     }
                 }
-            } else {
-                runOnUiThread ( ( ) -> {
-                    Intent intent = new Intent ( Settings.Panel.ACTION_WIFI );
-                    startActivity ( intent );
-                } );
             }
-
-
         } ).start ( );
+
     }
 
-
+    private void enableWifi(){
+        Intent intent = new Intent ( Settings.Panel.ACTION_WIFI );
+        startActivity ( intent );
+    }
     /*
         public void sendPhotoViaUDP(String ipAddress, int port, Bitmap photo) {
             AsyncTask.execute(() -> {
