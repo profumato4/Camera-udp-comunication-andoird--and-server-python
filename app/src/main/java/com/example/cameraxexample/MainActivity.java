@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.MediaActionSound;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -241,6 +243,13 @@ public class MainActivity extends AppCompatActivity {
                 values.put ( MediaStore.Images.Media.DATA , file.getAbsolutePath ( ) );
                 values.put ( MediaStore.Images.Media.IS_PENDING , 1 );
 
+                new Thread ( ( ) -> {
+
+                    MediaActionSound mediaActionSound = new MediaActionSound ( );
+                    mediaActionSound.play ( MediaActionSound.SHUTTER_CLICK );
+
+                } ).start ( );
+
                 ContentResolver resolver = getContentResolver ( );
                 Uri imageUri = resolver.insert ( MediaStore.Images.Media.EXTERNAL_CONTENT_URI , values );
 
@@ -248,10 +257,10 @@ public class MainActivity extends AppCompatActivity {
                     if ( imageUri != null ) {
                         OutputStream outputStream = resolver.openOutputStream ( imageUri );
                         Bitmap bitmap = BitmapFactory.decodeFile ( file.getAbsolutePath ( ) );
-                        if(cameraFacing == CameraSelector.LENS_FACING_BACK){
-                            bitmap = rotateBitmap(bitmap, -270);
-                        }else{
-                            bitmap = rotateBitmap(bitmap, 270);
+                        if ( cameraFacing == CameraSelector.LENS_FACING_BACK ) {
+                            bitmap = rotateBitmap ( bitmap , -270 );
+                        } else {
+                            bitmap = rotateBitmap ( bitmap , 270 );
                         }
                         bitmap.compress ( Bitmap.CompressFormat.JPEG , 100 , outputStream );
                         UDP udp = new UDP ( );
@@ -287,7 +296,6 @@ public class MainActivity extends AppCompatActivity {
             }
         } );
     }
-
 
     private void setFlashIcon ( @NonNull Camera camera ) {
         if ( camera.getCameraInfo ( ).hasFlashUnit ( ) ) {
@@ -334,11 +342,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public  Bitmap rotateBitmap(Bitmap source, float angle) {
-        Matrix matrix = new Matrix ();
-        matrix.postRotate(angle);
+    public Bitmap rotateBitmap ( Bitmap source , float angle ) {
+        Matrix matrix = new Matrix ( );
+        matrix.postRotate ( angle );
 
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+        return Bitmap.createBitmap ( source , 0 , 0 , source.getWidth ( ) , source.getHeight ( ) , matrix , true );
     }
 
 }
