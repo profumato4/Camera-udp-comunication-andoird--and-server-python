@@ -11,18 +11,18 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.MediaActionSound;
 import android.net.Uri;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiNetworkSuggestion;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -35,15 +35,19 @@ import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.cameraxexample.R;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,17 +55,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String PASSWORD = "rq7ngXZMQlc3NTVl1pZCNTlK";
     private final Context context = MainActivity.this;
     private WifiManager wifiManager;
+    private final Executor executor = Executors.newSingleThreadExecutor ( );
 
     ImageButton capture, toggleFlash, flipCamera;
     private PreviewView previewView;
     int cameraFacing = CameraSelector.LENS_FACING_BACK;
 
-    private final ActivityResultLauncher < String > activityResultLauncher = registerForActivityResult ( new ActivityResultContracts.RequestPermission ( ) , new ActivityResultCallback < Boolean > ( ) {
-        @Override
-        public void onActivityResult ( Boolean result ) {
-            if ( result ) {
-                startCamera ( cameraFacing );
-            }
+    private final ActivityResultLauncher < String > activityResultLauncher = registerForActivityResult ( new ActivityResultContracts.RequestPermission ( ) , result -> {
+        if ( result ) {
+            startCamera ( cameraFacing );
         }
     } );
 
@@ -76,52 +78,82 @@ public class MainActivity extends AppCompatActivity {
         toggleFlash = findViewById ( R.id.toggleFlash );
         flipCamera = findViewById ( R.id.flipCamera );
 
-        if ( ContextCompat.checkSelfPermission ( MainActivity.this , Manifest.permission.CAMERA ) != PackageManager.PERMISSION_GRANTED ) {
-            activityResultLauncher.launch ( Manifest.permission.CAMERA );
-        } else {
-            startCamera ( cameraFacing );
-        }
-
-        if(!isWifiEnabled ()){
-            enableWifi ();
-        }else if(isWifiEnabled ()){
-            connectToWifi2 ();
-        }
-
-        flipCamera.setOnClickListener ( new View.OnClickListener ( ) {
-            @Override
-            public void onClick ( View view ) {
-                if ( cameraFacing == CameraSelector.LENS_FACING_BACK ) {
-                    cameraFacing = CameraSelector.LENS_FACING_FRONT;
-                } else {
-                    cameraFacing = CameraSelector.LENS_FACING_BACK;
-                }
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ) {
+            if ( ContextCompat.checkSelfPermission ( MainActivity.this , Manifest.permission.CAMERA ) != PackageManager.PERMISSION_GRANTED ) {
+                activityResultLauncher.launch ( Manifest.permission.CAMERA );
+            } else {
                 startCamera ( cameraFacing );
             }
+        } else if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 ) {
+            if ( ContextCompat.checkSelfPermission ( MainActivity.this , Manifest.permission.WRITE_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions ( MainActivity.this , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE} , 123 );
+
+            } else if ( ContextCompat.checkSelfPermission ( MainActivity.this , Manifest.permission.READ_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions ( MainActivity.this , new String[]{Manifest.permission.READ_EXTERNAL_STORAGE} , 369 );
+
+            } else {
+
+                startCamera ( cameraFacing );
+
+            }
+
+
+        }
+
+
+        if ( !isWifiEnabled ( ) ) {
+            enableWifi ( );
+        } else if ( isWifiEnabled ( ) ) {
+            connectToWifi2 ( );
+        }
+
+        flipCamera.setOnClickListener ( view -> {
+            if ( cameraFacing == CameraSelector.LENS_FACING_BACK ) {
+                cameraFacing = CameraSelector.LENS_FACING_FRONT;
+            } else {
+                cameraFacing = CameraSelector.LENS_FACING_BACK;
+            }
+            startCamera ( cameraFacing );
         } );
     }
 
 
     private void connectToWifi ( ) {
-        final WifiNetworkSuggestion wifi =
-                new WifiNetworkSuggestion.Builder ( )
-                        .setSsid ( SSID )
-                        .setWpa2Passphrase ( PASSWORD )
-                        .build ( );
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ) {
+            final WifiNetworkSuggestion wifi =
+                    new WifiNetworkSuggestion.Builder ( )
+                            .setSsid ( SSID )
+                            .setWpa2Passphrase ( PASSWORD )
+                            .build ( );
 
-        wifiManager = ( WifiManager ) context.getSystemService ( Context.WIFI_SERVICE );
-        wifiManager.addNetworkSuggestions ( Collections.singletonList ( wifi ) );
+            wifiManager = ( WifiManager ) context.getApplicationContext ( ).getSystemService ( Context.WIFI_SERVICE );
+            wifiManager.addNetworkSuggestions ( Collections.singletonList ( wifi ) );
+        } else if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 ) {
+            WifiConfiguration wifiConfig = new WifiConfiguration ( );
+            wifiConfig.SSID = "\"" + SSID + "\"";
+            wifiConfig.preSharedKey = "\"" + PASSWORD + "\"";
+            wifiConfig.allowedKeyManagement.set ( WifiConfiguration.KeyMgmt.WPA_PSK );
+
+            wifiManager = ( WifiManager ) context.getApplicationContext ( ).getSystemService ( Context.WIFI_SERVICE );
+
+            int networkId = wifiManager.addNetwork ( wifiConfig );
+
+            if ( networkId != -1 ) {
+                wifiManager.enableNetwork ( networkId , true );
+                wifiManager.reconnect ( );
+            }
+        }
+
 
     }
 
     private boolean checkWifiConnection ( ) {
-        wifiManager = ( WifiManager ) context.getSystemService ( Context.WIFI_SERVICE );
+        wifiManager = ( WifiManager ) context.getApplicationContext ( ).getSystemService ( Context.WIFI_SERVICE );
         WifiInfo wifiInfo = wifiManager.getConnectionInfo ( );
 
         if ( wifiInfo != null && wifiInfo.getNetworkId ( ) != -1 ) {
             String currentSSID = wifiInfo.getSSID ( ).replace ( "\"" , "" );
             if ( currentSSID.equals ( SSID ) ) {
-                checkResult ( true );
                 return true;
             } else {
                 return false;
@@ -131,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isWifiEnabled ( ) {
-        wifiManager = ( WifiManager ) context.getSystemService ( Context.WIFI_SERVICE );
+        wifiManager = ( WifiManager ) context.getApplicationContext ( ).getSystemService ( Context.WIFI_SERVICE );
         return wifiManager.isWifiEnabled ( );
     }
 
@@ -151,40 +183,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void enableWifi(){
-        Intent intent = new Intent ( Settings.Panel.ACTION_WIFI );
-        startActivity ( intent );
-    }
-    /*
-        public void sendPhotoViaUDP(String ipAddress, int port, Bitmap photo) {
-            AsyncTask.execute(() -> {
-                try {
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    byte[] byteArray = stream.toByteArray();
-
-                    DatagramSocket socket = new DatagramSocket();
-                    InetAddress serverAddr = InetAddress.getByName(ipAddress);
-                    DatagramPacket packet = new DatagramPacket(byteArray, byteArray.length, serverAddr, port);
-
-                    socket.send(packet);
-                    socket.close();
-
-                    runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Foto inviata con successo via UDP", Toast.LENGTH_SHORT).show();
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    runOnUiThread(() -> {
-                        Toast.makeText(MainActivity.this, "Errore nell'invio della foto via UDP", Toast.LENGTH_SHORT).show();
-                        Log.e("UDP", "Exception during UDP photo transmission", e);
-                    });
-                }
-            });
+    private void enableWifi ( ) {
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ) {
+            Intent intent = new Intent ( Settings.Panel.ACTION_WIFI );
+            startActivity ( intent );
+        } else if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 ) {
+            wifiManager.setWifiEnabled ( true );
         }
 
-
-    */
+    }
 
     public void startCamera ( int cameraFacing ) {
         int aspectRatio = aspectRatio ( previewView.getWidth ( ) , previewView.getHeight ( ) );
@@ -192,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
         listenableFuture.addListener ( ( ) -> {
             try {
-                ProcessCameraProvider cameraProvider = ( ProcessCameraProvider ) listenableFuture.get ( );
+                ProcessCameraProvider cameraProvider = listenableFuture.get ( );
 
                 Preview preview = new Preview.Builder ( ).setTargetAspectRatio ( aspectRatio ).build ( );
 
@@ -207,22 +214,14 @@ public class MainActivity extends AppCompatActivity {
 
                 Camera camera = cameraProvider.bindToLifecycle ( this , cameraSelector , preview , imageCapture );
 
-                capture.setOnClickListener ( new View.OnClickListener ( ) {
-                    @Override
-                    public void onClick ( View view ) {
-                        if ( ContextCompat.checkSelfPermission ( MainActivity.this , Manifest.permission.WRITE_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED ) {
-                            activityResultLauncher.launch ( Manifest.permission.WRITE_EXTERNAL_STORAGE );
-                        }
-                        takePicture ( imageCapture );
+                capture.setOnClickListener ( view -> {
+                    if ( ContextCompat.checkSelfPermission ( MainActivity.this , Manifest.permission.WRITE_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED ) {
+                        activityResultLauncher.launch ( Manifest.permission.WRITE_EXTERNAL_STORAGE );
                     }
+                    takePicture ( imageCapture );
                 } );
 
-                toggleFlash.setOnClickListener ( new View.OnClickListener ( ) {
-                    @Override
-                    public void onClick ( View view ) {
-                        setFlashIcon ( camera );
-                    }
-                } );
+                toggleFlash.setOnClickListener ( view -> setFlashIcon ( camera ) );
 
                 preview.setSurfaceProvider ( previewView.getSurfaceProvider ( ) );
             } catch ( ExecutionException | InterruptedException e ) {
@@ -233,71 +232,116 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void takePicture ( @NonNull ImageCapture imageCapture ) {
-        final File file = new File ( getExternalFilesDir ( Environment.DIRECTORY_PICTURES ) , "image" + System.currentTimeMillis ( ) + ".jpeg" );
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ) {
+            final File file = new File ( getExternalFilesDir ( Environment.DIRECTORY_PICTURES ) , "image" + System.currentTimeMillis ( ) + ".jpeg" );
 
-        ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder ( file ).build ( );
+            ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder ( file ).build ( );
 
-        imageCapture.takePicture ( outputFileOptions , Executors.newCachedThreadPool ( ) , new ImageCapture.OnImageSavedCallback ( ) {
-            @Override
-            public void onImageSaved ( @NonNull ImageCapture.OutputFileResults outputFileResults ) {
-                ContentValues values = new ContentValues ( );
-                values.put ( MediaStore.Images.Media.DISPLAY_NAME , file.getName ( ) );
-                values.put ( MediaStore.Images.Media.MIME_TYPE , "image/jpeg" );
-                values.put ( MediaStore.Images.Media.DATA , file.getAbsolutePath ( ) );
-                values.put ( MediaStore.Images.Media.IS_PENDING , 1 );
+            imageCapture.takePicture ( outputFileOptions , Executors.newCachedThreadPool ( ) , new ImageCapture.OnImageSavedCallback ( ) {
+                @Override
+                public void onImageSaved ( @NonNull ImageCapture.OutputFileResults outputFileResults ) {
+                    ContentValues values = new ContentValues ( );
+                    values.put ( MediaStore.Images.Media.DISPLAY_NAME , file.getName ( ) );
+                    values.put ( MediaStore.Images.Media.MIME_TYPE , "image/jpeg" );
+                    values.put ( MediaStore.Images.Media.DATA , file.getAbsolutePath ( ) );
+                    values.put ( MediaStore.Images.Media.IS_PENDING , 1 );
 
-                new Thread ( ( ) -> {
+                    new Thread ( ( ) -> {
 
-                    MediaActionSound mediaActionSound = new MediaActionSound ( );
-                    mediaActionSound.play ( MediaActionSound.SHUTTER_CLICK );
+                        MediaActionSound mediaActionSound = new MediaActionSound ( );
+                        mediaActionSound.play ( MediaActionSound.SHUTTER_CLICK );
 
-                } ).start ( );
+                    } ).start ( );
 
-                ContentResolver resolver = getContentResolver ( );
-                Uri imageUri = resolver.insert ( MediaStore.Images.Media.EXTERNAL_CONTENT_URI , values );
+                    ContentResolver resolver = getContentResolver ( );
+                    Uri imageUri = resolver.insert ( MediaStore.Images.Media.EXTERNAL_CONTENT_URI , values );
 
-                try {
-                    if ( imageUri != null ) {
-                        OutputStream outputStream = resolver.openOutputStream ( imageUri );
-                        Bitmap bitmap = BitmapFactory.decodeFile ( file.getAbsolutePath ( ) );
-                        if ( cameraFacing == CameraSelector.LENS_FACING_BACK ) {
-                            bitmap = rotateBitmap ( bitmap , -270 );
-                        } else {
-                            bitmap = rotateBitmap ( bitmap , 270 );
+                    try {
+                        if ( imageUri != null ) {
+                            OutputStream outputStream = resolver.openOutputStream ( imageUri );
+                            Bitmap bitmap = BitmapFactory.decodeFile ( file.getAbsolutePath ( ) );
+                            if ( cameraFacing == CameraSelector.LENS_FACING_BACK ) {
+                                bitmap = rotateBitmap ( bitmap , -270 );
+                            } else {
+                                bitmap = rotateBitmap ( bitmap , 270 );
+                            }
+                            bitmap.compress ( Bitmap.CompressFormat.JPEG , 100 , outputStream );
+                            UDP udp = new UDP (context );
+                            udp.execute ( );
+                            outputStream.close ( );
                         }
-                        bitmap.compress ( Bitmap.CompressFormat.JPEG , 100 , outputStream );
-                        UDP udp = new UDP ( );
-                        udp.execute ( );
-                        outputStream.close ( );
+                    } catch ( Exception e ) {
+                        e.printStackTrace ( );
+                    } finally {
+                        values.put ( MediaStore.Images.Media.IS_PENDING , 0 );
+                        if ( imageUri != null ) {
+                            resolver.update ( imageUri , values , null , null );
+                        }
                     }
-                } catch ( Exception e ) {
-                    e.printStackTrace ( );
-                } finally {
-                    values.put ( MediaStore.Images.Media.IS_PENDING , 0 );
-                    resolver.update ( imageUri , values , null , null );
-                }
 
-                runOnUiThread ( new Runnable ( ) {
-                    @Override
-                    public void run ( ) {
+                    runOnUiThread ( ( ) -> {
                         Toast.makeText ( MainActivity.this , "Immagine salvata in: " + file.getPath ( ) , Toast.LENGTH_SHORT ).show ( );
                         System.out.println ( file.getPath ( ) );
-                    }
-                } );
-                startCamera ( cameraFacing );
-            }
+                    } );
+                    startCamera ( cameraFacing );
+                }
 
-            @Override
-            public void onError ( @NonNull ImageCaptureException exception ) {
-                runOnUiThread ( new Runnable ( ) {
-                    @Override
-                    public void run ( ) {
-                        Toast.makeText ( MainActivity.this , "Fallito: " + exception.getMessage ( ) , Toast.LENGTH_SHORT ).show ( );
+                @Override
+                public void onError ( @NonNull ImageCaptureException exception ) {
+                    runOnUiThread ( ( ) -> Toast.makeText ( MainActivity.this , "Fallito: " + exception.getMessage ( ) , Toast.LENGTH_SHORT ).show ( ) );
+                    startCamera ( cameraFacing );
+                }
+            } );
+        } else if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 ) {
+            final File file = new File ( getExternalFilesDir ( Environment.DIRECTORY_PICTURES ) , "image" + System.currentTimeMillis ( ) + ".jpeg" );
+
+            ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder ( file ).build ( );
+
+            imageCapture.takePicture ( outputFileOptions , Executors.newCachedThreadPool ( ) , new ImageCapture.OnImageSavedCallback ( ) {
+                @Override
+                public void onImageSaved ( @NonNull ImageCapture.OutputFileResults outputFileResults ) {
+                    try {
+                        String filePath = file.getAbsolutePath ( );
+
+
+                        Bitmap bitmap = BitmapFactory.decodeFile ( filePath );
+
+                        try (OutputStream outputStream = new FileOutputStream ( filePath )) {
+                            bitmap.compress ( Bitmap.CompressFormat.JPEG , 100 , outputStream );
+                            new Thread ( ( ) -> {
+
+                                MediaActionSound mediaActionSound = new MediaActionSound ( );
+                                mediaActionSound.play ( MediaActionSound.SHUTTER_CLICK );
+
+                            } ).start ( );
+                            UDP udp = new UDP ( context);
+                            udp.execute ( );
+                            outputStream.flush ( );
+                        } catch ( IOException e ) {
+                            e.printStackTrace ( );
+                        }
+
+                        runOnUiThread ( ( ) -> {
+                            Toast.makeText ( MainActivity.this , "Immagine salvata in: " + filePath , Toast.LENGTH_SHORT ).show ( );
+                            System.out.println ( filePath );
+                            startCamera ( cameraFacing );
+                        } );
+
+
+                    } catch ( Exception e ) {
+                        e.printStackTrace ( );
                     }
-                } );
-                startCamera ( cameraFacing );
-            }
-        } );
+                }
+
+                @Override
+                public void onError ( @NonNull ImageCaptureException exception ) {
+                    runOnUiThread ( ( ) -> Toast.makeText ( MainActivity.this , "Fallito: " + exception.getMessage ( ) , Toast.LENGTH_SHORT ).show ( ) );
+                    startCamera ( cameraFacing );
+                }
+            } );
+        }
+
+
     }
 
     private void setFlashIcon ( @NonNull Camera camera ) {
@@ -310,14 +354,10 @@ public class MainActivity extends AppCompatActivity {
                 toggleFlash.setImageResource ( R.drawable.baseline_flash_on_24 );
             }
         } else {
-            runOnUiThread ( new Runnable ( ) {
-                @Override
-                public void run ( ) {
-                    Toast.makeText ( MainActivity.this , "Il flash non è disponibile" , Toast.LENGTH_SHORT ).show ( );
-                }
-            } );
+            runOnUiThread ( ( ) -> Toast.makeText ( MainActivity.this , "Il flash non è disponibile" , Toast.LENGTH_SHORT ).show ( ) );
         }
     }
+
 
     private int aspectRatio ( int width , int height ) {
         double previewRatio = ( double ) Math.max ( width , height ) / Math.min ( width , height );
@@ -327,23 +367,6 @@ public class MainActivity extends AppCompatActivity {
         return AspectRatio.RATIO_16_9;
     }
 
-    private void checkResult ( boolean isSuccess ) {
-        if ( isSuccess ) {
-            runOnUiThread ( new Runnable ( ) {
-                @Override
-                public void run ( ) {
-                    Toast.makeText ( MainActivity.this , "Connessione stabilita" , Toast.LENGTH_SHORT ).show ( );
-                }
-            } );
-        } else {
-            runOnUiThread ( new Runnable ( ) {
-                @Override
-                public void run ( ) {
-                    Toast.makeText ( MainActivity.this , "Connessione non stabilita" , Toast.LENGTH_SHORT ).show ( );
-                }
-            } );
-        }
-    }
 
     public Bitmap rotateBitmap ( Bitmap source , float angle ) {
         Matrix matrix = new Matrix ( );

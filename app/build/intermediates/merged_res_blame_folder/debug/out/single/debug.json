@@ -44,10 +44,6 @@
         "source": "com.example.cameraxexample.app-main-34:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.cameraxexample.app-merged_res-32:/drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "com.example.cameraxexample.app-main-34:/drawable-v24/ic_launcher_foreground.xml"
-    },
-    {
         "merged": "com.example.cameraxexample.app-merged_res-32:/mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "com.example.cameraxexample.app-main-34:/mipmap-xxxhdpi/ic_launcher.webp"
     },
@@ -70,6 +66,10 @@
     {
         "merged": "com.example.cameraxexample.app-merged_res-32:/drawable_icon.png.flat",
         "source": "com.example.cameraxexample.app-main-34:/drawable/icon.png"
+    },
+    {
+        "merged": "com.example.cameraxexample.app-merged_res-32:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.cameraxexample.app-pngs-28:/drawable-anydpi-v24/ic_launcher_foreground.xml"
     },
     {
         "merged": "com.example.cameraxexample.app-merged_res-32:/drawable_ic_launcher_background.xml.flat",
